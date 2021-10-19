@@ -1,0 +1,51 @@
+unit Unit2;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.Oracle,
+  FireDAC.Phys.OracleDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS,
+  FireDAC.DApt.Intf, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, Vcl.Dialogs;
+
+type
+  TDataModule2 = class(TDataModule)
+    dtbBaseDato_: TFDConnection;
+    CLIENTES: TFDQuery;
+    CLIENTESCLIENTE: TStringField;
+    CLIENTESNOMBRE_CLIENTE: TStringField;
+    CLIENTESDIRECCION: TStringField;
+    CABEZA_FACTURA: TFDQuery;
+    CABEZA_FACTURANUMERO: TStringField;
+    CABEZA_FACTURAFECHA: TDateTimeField;
+    CABEZA_FACTURACLIENTE: TStringField;
+    CABEZA_FACTURATOTAL: TFloatField;
+    DTSCABEZA_FACTURA: TDataSource;
+    DTSCLIENTES: TDataSource;
+    procedure DataModuleCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DataModule2: TDataModule2;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+procedure TDataModule2.DataModuleCreate(Sender: TObject);
+begin
+
+
+   DataModule2.CLIENTES.Close;
+  DataModule2.CLIENTES.Open;
+end;
+
+end.

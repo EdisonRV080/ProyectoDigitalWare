@@ -1,0 +1,110 @@
+object DataModule2: TDataModule2
+  OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  Height = 298
+  Width = 433
+  object dtbBaseDato_: TFDConnection
+    ConnectionName = 'CONN'
+    Params.Strings = (
+      'Database=DESADB'
+      'User_Name=apodes21'
+      'Password=apot'
+      'DriverID=Ora')
+    FormatOptions.AssignedValues = [fvMapRules, fvMaxBcdPrecision, fvMaxBcdScale, fvDataSnapCompatibility, fvFmtDisplayTime, fvFmtDisplayNumeric, fvFmtEditNumeric]
+    FormatOptions.OwnMapRules = True
+    FormatOptions.MapRules = <
+      item
+        SourceDataType = dtBCD
+        TargetDataType = dtDouble
+      end
+      item
+        SizeMin = 256
+        SourceDataType = dtAnsiString
+        TargetDataType = dtMemo
+      end
+      item
+        SizeMax = 255
+        SourceDataType = dtWideString
+        TargetDataType = dtAnsiString
+      end
+      item
+        SizeMin = 256
+        SourceDataType = dtWideString
+        TargetDataType = dtMemo
+      end
+      item
+        SourceDataType = dtFmtBCD
+        TargetDataType = dtDouble
+      end>
+    FormatOptions.MaxBcdPrecision = 2147483647
+    FormatOptions.MaxBcdScale = 2147483647
+    LoginPrompt = False
+    Left = 25
+    Top = 8
+  end
+  object CLIENTES: TFDQuery
+    Connection = dtbBaseDato_
+    SQL.Strings = (
+      'SELECT * FROM CLIENTES')
+    Left = 104
+    Top = 8
+    object CLIENTESCLIENTE: TStringField
+      FieldName = 'CLIENTE'
+      Origin = 'CLIENTE'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Size = 12
+    end
+    object CLIENTESNOMBRE_CLIENTE: TStringField
+      FieldName = 'NOMBRE_CLIENTE'
+      Origin = 'NOMBRE_CLIENTE'
+      Required = True
+      Size = 40
+    end
+    object CLIENTESDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Origin = 'DIRECCION'
+      Size = 40
+    end
+  end
+  object CABEZA_FACTURA: TFDQuery
+    Connection = dtbBaseDato_
+    SQL.Strings = (
+      'SELECT * FROM CABEZA_FACTURA')
+    Left = 104
+    Top = 64
+    object CABEZA_FACTURANUMERO: TStringField
+      FieldName = 'NUMERO'
+      Origin = 'NUMERO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Size = 8
+    end
+    object CABEZA_FACTURAFECHA: TDateTimeField
+      FieldName = 'FECHA'
+      Origin = 'FECHA'
+      Required = True
+    end
+    object CABEZA_FACTURACLIENTE: TStringField
+      FieldName = 'CLIENTE'
+      Origin = 'CLIENTE'
+      Required = True
+      Size = 12
+    end
+    object CABEZA_FACTURATOTAL: TFloatField
+      FieldName = 'TOTAL'
+      Origin = 'TOTAL'
+      Required = True
+    end
+  end
+  object DTSCABEZA_FACTURA: TDataSource
+    DataSet = CABEZA_FACTURA
+    Left = 248
+    Top = 72
+  end
+  object DTSCLIENTES: TDataSource
+    DataSet = CLIENTES
+    Left = 232
+    Top = 24
+  end
+end
